@@ -127,7 +127,7 @@ function App() {
 
   return (
     <div>
-      <h1>Hello Chamundeswari 👋</h1>
+      <h1>Welcome to My React Project 👋</h1>
       <p>My first React practice project</p>
 
       <button onClick={() => setCount(count + 1)}>
