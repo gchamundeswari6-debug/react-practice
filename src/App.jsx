@@ -121,18 +121,20 @@
 
 // export default App
 import { useState } from 'react'
+import Header from './components/Header'
+import Counter from './components/Counter'
+import Users from './components/Users'
 
 function App() {
   const [count, setCount] = useState(0)
 
   return (
     <div>
+      <Header name="Chamundeswari"/>
       <h1>Welcome to My React Project 👋</h1>
       <p>My first React practice project</p>
-
-      <button onClick={() => setCount(count + 1)}>
-        Count: {count}
-      </button>
+      <Counter initialCount={0} step={2}/>
+      <Users />
     </div>
   )
 }
