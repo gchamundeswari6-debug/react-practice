@@ -15,7 +15,7 @@ function Counter({ initialCount, step }) {
 
       <p>
         {count === 0 ? 'Counter is at zero' : 'Counter is running'}
-      </p>
+      </p> 
 
       <button onClick={() => setCount(count + step)}>
         Increment
