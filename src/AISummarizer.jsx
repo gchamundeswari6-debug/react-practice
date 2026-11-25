@@ -34,7 +34,7 @@ function AISummarizer() {
         }
     }
 
-    const handleSummarize = () => {
+    const handleSummarize = async () => {
         if (!text.trim()) {
             setSummary('Please enter some text.')
             return
@@ -43,12 +43,36 @@ function AISummarizer() {
         setLoading(true)
         setSummary('')
 
-        setTimeout(() => {
-            setSummary(text.slice(0, 100) + '...')
-            setLoading(false)
-        }, 2000)
-    }
+        try {
+            const response = await fetch(
+                'http://localhost:5000/summarize',
+                {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        text: text
+                    })
+                }
+            )
 
+            const data = await response.json()
+
+            if (!response.ok) {
+                throw new Error(data.error || 'Failed to summarize')
+            }
+            console.log('aaaaa',data)
+
+            setSummary(data.summary)
+
+        } catch (error) {
+            setSummary('Something went wrong. Please try again.')
+
+        } finally {
+            setLoading(false)
+        }
+    }
     const handleClear = () => {
         setText('')
         setSummary('')
