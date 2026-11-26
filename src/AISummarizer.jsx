@@ -40,7 +40,7 @@ function AISummarizer() {
 
     const handleSummarize = async () => {
         if (!text.trim()) {
-            setSummary('Please enter some text.')
+            setError('Please enter some text.')
             return
         }
 

@@ -46,7 +46,9 @@ Follow these rules:
 4. Do not change the original meaning.
 5. Do not add new information.
 6. Avoid repeating the same information.
-
+7. Reduce the text length by at least 40% when possible.
+8. Do not return the original sentences word for word.
+9. Combine related points into a concise paragraph.
 Text:
 ${text}`
         })
