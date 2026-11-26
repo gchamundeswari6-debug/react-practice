@@ -8,6 +8,8 @@ function AISummarizer() {
     const [users, setUsers] = useState([])
     const [usersLoading, setUsersLoading] = useState(false)
     const [usersError, setUsersError] = useState('')
+    const [error, setError] = useState('')
+    const [success, setSuccess] = useState('')
 
     const getUsers = async () => {
         setUsersLoading(true)
@@ -42,6 +44,8 @@ function AISummarizer() {
 
         setLoading(true)
         setSummary('')
+        setError('')
+        setSuccess('')
 
         try {
             const response = await fetch(
@@ -62,12 +66,13 @@ function AISummarizer() {
             if (!response.ok) {
                 throw new Error(data.error || 'Failed to summarize')
             }
-            console.log('aaaaa', data)
+            console.log('data', data)
 
             setSummary(data.summary)
+            setSuccess('Summary generated successfully!')
 
         } catch (error) {
-            setSummary(error.message)
+            setError(error.message)
         } finally {
             setLoading(false)
         }
@@ -77,6 +82,8 @@ function AISummarizer() {
         setSummary('')
         setUsers([])
         setUsersError('')
+        setError('')
+        setSuccess('')
     }
 
     return (
@@ -120,9 +127,23 @@ function AISummarizer() {
                     ))}
                 </>
             )}
+{success && (
+    <p className="text-success">
+        {success}
+    </p>
+)}
+            {summary && (
+                <>
+                    <h2>Summary</h2>
+                    <p>{summary}</p>
+                </>
+            )}
 
-            <h2>Summary</h2>
-            <p>{summary}</p>
+            {error && (
+                <p className="text-danger">
+                    {error}
+                </p>
+            )}
         </div>
     )
 }
