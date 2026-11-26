@@ -10,6 +10,8 @@ function AISummarizer() {
     const [usersError, setUsersError] = useState('')
     const [error, setError] = useState('')
     const [success, setSuccess] = useState('')
+    const [showCount, setShowCount] = useState(false)
+    const [countText, setCountText] = useState('')
 
     const getUsers = async () => {
         setUsersLoading(true)
@@ -84,6 +86,8 @@ function AISummarizer() {
         setUsersError('')
         setError('')
         setSuccess('')
+        setShowCount(false)
+        setCountText('')
     }
 
     return (
@@ -94,10 +98,22 @@ function AISummarizer() {
                 placeholder="Enter your text here..."
                 value={text}
                 onChange={(e) => setText(e.target.value)}
+                onBlur={() => {
+                    setCountText(text)
+                    setShowCount(true)
+                }}
                 rows={5}
                 cols={40}
             />
 
+            {showCount && (
+                <p>Characters: {countText.length}</p>
+            )}
+            {showCount && (
+                <p>
+                    Words: {countText.trim() ? countText.trim().split(/\s+/).length : 0}
+                </p>
+            )}
             <br />
 
             <button onClick={handleSummarize} disabled={loading} className="btn btn-primary m2">
@@ -127,11 +143,11 @@ function AISummarizer() {
                     ))}
                 </>
             )}
-{success && (
-    <p className="text-success">
-        {success}
-    </p>
-)}
+            {success && (
+                <p className="text-success">
+                    {success}
+                </p>
+            )}
             {summary && (
                 <>
                     <h2>Summary</h2>

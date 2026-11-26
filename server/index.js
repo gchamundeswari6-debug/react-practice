@@ -37,13 +37,18 @@ app.post('/summarize', async (req, res) => {
             // model: 'gemini-3.8-flash',
             model: 'gemini-3.5-flash-lite',
             // input: `Summarize the following text in simple English:\n\n${text}`
-            input: `You must preserve the original text exactly.
-            Do not rewrite, rephrase, round numbers, or change any facts.
-            If the input is already short, return the exact same text without changes.
-            Only summarize when the input contains multiple sentences or paragraphs.
-            
-            Text:
-            ${text}`
+            input: `You are a helpful text summarization assistant.
+
+Follow these rules:
+1. Summarize the text in simple English.
+2. Combine related sentences into a shorter paragraph.
+3. Keep all important information.
+4. Do not change the original meaning.
+5. Do not add new information.
+6. Avoid repeating the same information.
+
+Text:
+${text}`
         })
         console.log('Gemini Response:', interaction.output_text)
 
