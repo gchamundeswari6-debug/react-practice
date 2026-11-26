@@ -62,13 +62,12 @@ function AISummarizer() {
             if (!response.ok) {
                 throw new Error(data.error || 'Failed to summarize')
             }
-            console.log('aaaaa',data)
+            console.log('aaaaa', data)
 
             setSummary(data.summary)
 
         } catch (error) {
-            setSummary('Something went wrong. Please try again.')
-
+            setSummary(error.message)
         } finally {
             setLoading(false)
         }
@@ -97,7 +96,11 @@ function AISummarizer() {
             <button onClick={handleSummarize} disabled={loading} className="btn btn-primary m2">
                 {loading ? 'Summarizing...' : 'Summarize'}
             </button>
-            <button onClick={handleClear} className="btn btn-primary m2">
+            <button
+                onClick={handleClear}
+                disabled={loading}
+                className="btn btn-primary m2"
+            >
                 Clear
             </button>
             <button onClick={getUsers} disabled={usersLoading} className="btn btn-primary">

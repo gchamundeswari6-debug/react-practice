@@ -32,19 +32,20 @@ app.post('/summarize', async (req, res) => {
                 summary: text.trim()
             })
         }
-
+        console.log('Gemini API is calling...')
         const interaction = await ai.interactions.create({
             // model: 'gemini-3.8-flash',
             model: 'gemini-3.5-flash-lite',
             // input: `Summarize the following text in simple English:\n\n${text}`
             input: `You must preserve the original text exactly.
-Do not rewrite, rephrase, round numbers, or change any facts.
-If the input is already short, return the exact same text without changes.
-Only summarize when the input contains multiple sentences or paragraphs.
-
-Text:
-${text}`
+            Do not rewrite, rephrase, round numbers, or change any facts.
+            If the input is already short, return the exact same text without changes.
+            Only summarize when the input contains multiple sentences or paragraphs.
+            
+            Text:
+            ${text}`
         })
+        console.log('Gemini Response:', interaction.output_text)
 
         res.json({
             summary: interaction.output_text
