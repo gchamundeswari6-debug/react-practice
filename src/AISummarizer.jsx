@@ -40,10 +40,18 @@ function AISummarizer() {
 
     const handleSummarize = async () => {
         if (!text.trim()) {
+            setSummary('')
+            setSuccess('')
             setError('Please enter some text.')
             return
         }
 
+        if (text.trim().length < 20) {
+            setSummary('')
+            setSuccess('')
+            setError('Please enter at least 20 characters.')
+            return
+        }
         setLoading(true)
         setSummary('')
         setError('')

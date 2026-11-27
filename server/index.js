@@ -19,8 +19,18 @@ app.get('/', (req, res) => {
 
 app.post('/summarize', async (req, res) => {
     try {
-        const text = req.body.text
+        if (typeof req.body.text !== 'string') {
+            return res.status(400).json({
+                error: 'Invalid text input. Please send text as a string.'
+            })
+        }
 
+        const text = req.body.text
+        if (!text.trim()) {
+            return res.status(400).json({
+                error: 'Text cannot be empty. Please enter some text.'
+            })
+        }
         const sentences = text.trim()
             .split(/(?<=[.!?])\s+|\n+/)
             .filter(sentence => sentence.trim())
@@ -41,7 +51,7 @@ app.post('/summarize', async (req, res) => {
 
 Follow these rules:
 1. Summarize the text in simple English.
-2. Combine related sentences into a shorter paragraph.
+2. Combine related sentences into a shorter paragrap.
 3. Keep all important information.
 4. Do not change the original meaning.
 5. Do not add new information.
@@ -52,10 +62,18 @@ Follow these rules:
 Text:
 ${text}`
         })
-        console.log('Gemini Response:', interaction.output_text)
+        const summary = interaction.output_text
+
+        if (!summary || !summary.trim()) {
+            return res.status(502).json({
+                error: 'AI returned an empty summary. Please try again.'
+            })
+        }
+
+        console.log('Gemini Response:', summary)
 
         res.json({
-            summary: interaction.output_text
+            summary: summary
         })
 
     } catch (error) {
