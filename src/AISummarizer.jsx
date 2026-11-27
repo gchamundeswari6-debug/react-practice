@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import './App.css'
+const API_URL = import.meta.env.VITE_API_URL
 
 function AISummarizer() {
     const [text, setText] = useState('')
@@ -59,7 +60,7 @@ function AISummarizer() {
 
         try {
             const response = await fetch(
-                'http://localhost:5000/summarize',
+                `${import.meta.env.VITE_API_URL}/summarize`,
                 {
                     method: 'POST',
                     headers: {
