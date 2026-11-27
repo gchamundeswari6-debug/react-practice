@@ -182,3 +182,13 @@
     border-right-color: var(--border);
   }
 }
+/* button {
+    padding: 10px 20px;
+    padding-right: 30px;
+    margin: 5px;
+    cursor: pointer;
+    border-radius: 5px;
+} */
+ .m2{
+  margin-right: 2px !important;
+ }

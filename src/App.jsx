@@ -124,6 +124,7 @@ import { useState } from 'react'
 import Header from './components/Header'
 import Counter from './components/Counter'
 import Users from './components/Users'
+import AISummarizer from './AISummarizer'
 
 function App() {
   const [count, setCount] = useState(0)
@@ -135,6 +136,7 @@ function App() {
       <p>My first React practice project</p>
       <Counter initialCount={0} step={2}/>
       <Users />
+      <AISummarizer />
     </div>
   )
 }
